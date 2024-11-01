@@ -1,0 +1,34 @@
+const repl = require('repl');
+
+function checkOddEven(num) {
+    if (num % 2 === 0) {
+        return `${num} is even.`;
+    } else {
+        return `${num} is odd.`;
+    }
+}
+
+const r = repl.start('Odd/Even Checker> ');
+
+r.context.checkOddEven = checkOddEven;
+
+r.defineCommand('check', {
+    help: 'Check if a number is odd or even. Usage: check <number>',
+    action(num) {
+        const number = parseInt(num, 10);
+        if (isNaN(number)) {
+            console.log('Please provide a valid number.');
+        } else {
+            console.log(checkOddEven(number));
+        }
+        this.displayPrompt();
+    }
+});
+
+r.defineCommand('exit', {
+    help: 'Exit the REPL',
+    action() {
+        console.log('Exiting the Odd/Even Checker.');
+        this.close();
+    }
+});
