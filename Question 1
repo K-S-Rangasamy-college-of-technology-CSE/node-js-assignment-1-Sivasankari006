@@ -1,0 +1,16 @@
+const fs = require('fs');
+
+console.log('Start blocking file read...');
+const blockingData = fs.readFileSync('example.txt', 'utf8');
+console.log('Blocking file content:', blockingData);
+console.log('Done with blocking read.');
+
+console.log('Start non-blocking file read...');
+fs.readFile('example.txt', 'utf8', (err, nonBlockingData) => {
+    if (err) {
+        console.error('Error reading file:', err);
+        return;
+    }
+    console.log('Non-blocking file content:', nonBlockingData);
+});
+console.log('Done with non-blocking read (this may appear before non-blocking content).');
