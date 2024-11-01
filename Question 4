@@ -1,0 +1,35 @@
+const dns = require('dns');
+
+const domain = 'example.com';
+
+dns.lookup(domain, (err, address, family) => {
+    if (err) {
+        console.error('Error during dns.lookup:', err);
+        return;
+    }
+    console.log(`dns.lookup: ${domain} has address ${address} and is IPv${family}`);
+});
+
+dns.resolve(domain, (err, records) => {
+    if (err) {
+        console.error('Error during dns.resolve:', err);
+        return;
+    }
+    console.log(`dns.resolve: ${domain} records:`, records);
+});
+
+dns.resolve4(domain, (err, addresses) => {
+    if (err) {
+        console.error('Error during dns.resolve4:', err);
+        return;
+    }
+    console.log(`dns.resolve4: ${domain} has IPv4 addresses:`, addresses);
+});
+
+dns.resolve6(domain, (err, addresses) => {
+    if (err) {
+        console.error('Error during dns.resolve6:', err);
+        return;
+    }
+    console.log(`dns.resolve6: ${domain} has IPv6 addresses:`, addresses);
+});
